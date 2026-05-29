@@ -1,4 +1,3 @@
-
 function Camera() {
 
   return (
@@ -18,7 +17,7 @@ function Camera() {
                         <div class="flex items-center gap-2">
                             <span class="relative inline-flex h-2 w-2">
                                 <span class="absolute inline-flex h-full w-full rounded-full opacity-70 bg-success animate-ping"></span>
-                                <span class="relative inline-flex h-2 w-2 rounded-full bg-success"></span>flex
+                                <span class="relative inline-flex h-2 w-2 rounded-full bg-success"></span>
                             </span>
                             <span class="text-xs font-medium text-foreground/90">Câmera 01</span>
                         </div>
