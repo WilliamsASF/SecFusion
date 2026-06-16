@@ -1,9 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Camera from './componentes/camera'
 import RespostaRapida from './componentes/respostaRapida'
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY);
 
 function App() {
+
+  const [dispositivos, setDispositivos] = useState([]);
+
+  useEffect(() => {
+    getDispositivos();
+  }, []);
+
+  async function getDispositivos() {
+    let { data, error } = await supabase.from('dispositivos').select('nome');  
+    if (error) {
+      console.error(error);
+      return;
+    }
+    setDispositivos(data);
+  }
 
   return (
     <>
