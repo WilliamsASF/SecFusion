@@ -2,6 +2,11 @@ import Camera from '../componentes/camera'
 import CardsStatus from '../componentes/dashboard/CardsStatus'
 import RespostaRapida from '../componentes/dashboard/RespostaRapida'
 import PainelAlertas from '../componentes/dashboard/PainelAlertas'
+import { useState, useEffect } from 'react'
+import { createClient } from "@supabase/supabase-js"
+
+
+const supabase = createClient("https://yeghuvshfbkwreeeuxjx.supabase.co", "sb_publishable_tJT3SJst4LsEa_5vWkODRQ_2OZbXhRD");
 
 // Mapeamento das 6 câmeras do protótipo. O componente Camera é o original
 // (não foi alterado) — só passamos as props que ele já aceita: nome e numero.
@@ -11,7 +16,7 @@ const CAMERAS = [
   { numero: '03', nome: 'Copa', url: "https://media.gettyimages.com/id/1297770174/pt/v%C3%ADdeo/view-form-surveillance-camera.mp4?s=mp4-640x640-gi&k=20&c=nQiMq45BZVg7bL3eU8AS8K5OOWvMKdInyMAzTktfi1o="},
   { numero: '04', nome: 'Corredor Leste', url: "https://media.gettyimages.com/id/1359004679/pt/v%C3%ADdeo/int-security-camera-angle-empty-hallway-in-large-brick-and-stone-hospital-or-college-building.mp4?s=mp4-640x640-gi&k=20&c=kOys483rV0J9QMsOp9wTwwvkqzRTuaWbIstVlUr_ctw=" },
   { numero: '05', nome: 'Saída por Trás', url: "https://media.gettyimages.com/id/1341485306/pt/v%C3%ADdeo/cctv-surveillance-camera-point-of-view-of-cat-walking-at-night.mp4?s=mp4-640x640-gi&k=20&c=ULzxi6fzRoEf6o88Q-1oGO1lu39yG7KbaOUll5QCVqI=" },
-  { numero: '06', nome: 'Perímetro Sul' },
+  { numero: '06', nome: 'Perímetro Sul' }
 ]
 
 // Dados mockados — entram aqui até a conexão com o Supabase ser ajustada.
@@ -47,6 +52,19 @@ const ALERTAS_MOCK = [
 ]
 
 function Dashboard() {
+  const [imagens, setImagens] = useState([]);
+  useEffect(() => {
+    getImagens();
+  }, []);
+  async function getImagens() {
+    const { data, error } = await supabase.from("camera").select();
+    if (error) {
+      console.error(error);
+      return;
+    }
+    setImagens(data);
+  }
+
   return (
     <div className="flex h-full flex-col gap-4 p-4 lg:flex-row">
       <div className="flex min-w-0 flex-1 flex-col gap-4">
@@ -55,8 +73,8 @@ function Dashboard() {
         <RespostaRapida />
 
         <div className="grid min-h-0 flex-1 content-start gap-3 overflow-y-auto sm:grid-cols-2 xl:grid-cols-3">
-          {CAMERAS.map((camera) => (
-            <Camera key={camera.numero} numero={camera.numero} nome={camera.nome} url={camera.url} />
+          {imagens.map((camera) => (
+            <Camera key={camera.id} numero={camera.id} nome={camera.nome} url={camera.imagem} />
           ))}
         </div>
       </div>
