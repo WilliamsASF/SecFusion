@@ -6,11 +6,11 @@ import PainelAlertas from '../componentes/dashboard/PainelAlertas'
 // Mapeamento das 6 câmeras do protótipo. O componente Camera é o original
 // (não foi alterado) — só passamos as props que ele já aceita: nome e numero.
 const CAMERAS = [
-  { numero: '01', nome: 'Entrada Principal' },
-  { numero: '02', nome: 'Estacionamento' },
-  { numero: '03', nome: 'Recepção' },
-  { numero: '04', nome: 'Corredor Leste' },
-  { numero: '05', nome: 'Depósito' },
+  { numero: '01', nome: 'Entrada Principal', url: "https://media.gettyimages.com/id/1382583677/pt/v%C3%ADdeo/people-walking-with-dog-in-the-early-morning-image-captured-by-cctv-surveillance-camera.mp4?s=mp4-640x640-gi&k=20&c=PQCFI10egKXVA-dewbmO-G63qBS9b4MH9SPhWq3biJ0="},
+  { numero: '02', nome: 'Visão Rua', url: "https://media.gettyimages.com/id/1224074054/pt/v%C3%ADdeo/home-security-camera-point-of-view-of-couple-taking-a-walk-at-evening-during-the-2020-global.mp4?s=mp4-640x640-gi&k=20&c=1FcOMfRGFi__Bm1UehwmMFyEh3Q0rghnA0bc5Ig9Qzs="},
+  { numero: '03', nome: 'Copa', url: "https://media.gettyimages.com/id/1297770174/pt/v%C3%ADdeo/view-form-surveillance-camera.mp4?s=mp4-640x640-gi&k=20&c=nQiMq45BZVg7bL3eU8AS8K5OOWvMKdInyMAzTktfi1o="},
+  { numero: '04', nome: 'Corredor Leste', url: "https://media.gettyimages.com/id/1359004679/pt/v%C3%ADdeo/int-security-camera-angle-empty-hallway-in-large-brick-and-stone-hospital-or-college-building.mp4?s=mp4-640x640-gi&k=20&c=kOys483rV0J9QMsOp9wTwwvkqzRTuaWbIstVlUr_ctw=" },
+  { numero: '05', nome: 'Saída por Trás', url: "https://media.gettyimages.com/id/1341485306/pt/v%C3%ADdeo/cctv-surveillance-camera-point-of-view-of-cat-walking-at-night.mp4?s=mp4-640x640-gi&k=20&c=ULzxi6fzRoEf6o88Q-1oGO1lu39yG7KbaOUll5QCVqI=" },
   { numero: '06', nome: 'Perímetro Sul' },
 ]
 
@@ -56,7 +56,7 @@ function Dashboard() {
 
         <div className="grid min-h-0 flex-1 content-start gap-3 overflow-y-auto sm:grid-cols-2 xl:grid-cols-3">
           {CAMERAS.map((camera) => (
-            <Camera key={camera.numero} numero={camera.numero} nome={camera.nome} />
+            <Camera key={camera.numero} numero={camera.numero} nome={camera.nome} url={camera.url} />
           ))}
         </div>
       </div>
